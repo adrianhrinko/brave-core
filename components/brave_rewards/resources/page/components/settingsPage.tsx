@@ -148,6 +148,25 @@ class SettingsPage extends React.Component<Props, State> {
         this.actions.processRewardsPageUrl(window.location.pathname, window.location.search)
       }
     }
+
+    this.handleURL()
+  }
+
+  handleURL () {
+    const { pathname } = window.location
+
+    if (pathname === '/enable') {
+      this.actions.saveOnboardingResult('opted-in')
+      window.history.replaceState({}, '', '/')
+      return
+    }
+
+    if (pathname.length > 1) {
+      const pathElements = pathname.split('/')
+      if (pathElements.length > 2) {
+        this.actions.processRewardsPageUrl(window.location.pathname, window.location.search)
+      }
+    }
   }
 
   openTOS () {
